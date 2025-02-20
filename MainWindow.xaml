@@ -35,8 +35,8 @@
 
             <WebView2 x:Name="TafelVorschau" Source="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="750"/>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="10" HorizontalAlignment="Center">
-                <Button x:Name="Favorisieren">
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="10" HorizontalAlignment="Center" x:Name="TafelOptionen" Visibility="Collapsed">
+                <Button x:Name="Favorisieren" Click="Favorisieren_Click">
                     <StackPanel Orientation="Horizontal" Spacing="6">
                         <FontIcon Glyph="&#xEB51;" x:Name="FavorisiertSymbol" />
                         <TextBlock Text="Favorisieren" />

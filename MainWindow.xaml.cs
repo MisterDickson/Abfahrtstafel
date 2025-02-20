@@ -1222,8 +1222,20 @@ namespace Abfahrtstafel
 ("Zurndorf", "Zu")
 };
 
+        const string favoritenSchluessel = "Favoriten";
+        public static Windows.Storage.ApplicationDataContainer einstellungen = Windows.Storage.ApplicationData.Current.LocalSettings;
+        string favorisierteStationen = string.Empty; // \n-getrennt
         private void StationsNamensListe_Loaded(object sender, RoutedEventArgs e)
         {
+            if (einstellungen.Values[favoritenSchluessel] != null && einstellungen.Values[favoritenSchluessel].ToString()!.Length > 1)
+            {
+                var s = einstellungen.Values[favoritenSchluessel].ToString();
+                if (s == null) return;
+                favorisierteStationen += s;
+                StationsNamensListe.ItemsSource = favorisierteStationen.Split('\n');
+                return;
+            }
+
             StationsNamensListe.ItemsSource = alleStationen.Select(Station => Station.name);
         }
 
@@ -1234,6 +1246,12 @@ namespace Abfahrtstafel
 
         private void StationsSuchFeld_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (StationsSuchFeld.Text.Length < 1 && favorisierteStationen.Length > 1)
+            {
+                StationsNamensListe.ItemsSource = favorisierteStationen.Split('\n');
+                return;
+            }
+
             StationsNamensListe.ItemsSource = alleStationen
             .Where(station => station.name.Contains(StationsSuchFeld.Text, StringComparison.OrdinalIgnoreCase))
             .Select(station => station.name);
@@ -1242,7 +1260,11 @@ namespace Abfahrtstafel
         private void StationsNamensListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItem = StationsNamensListe.SelectedItem;
-            if (selectedItem == null) return;
+            if (selectedItem == null)
+            {
+                TafelOptionen.Visibility = Visibility.Collapsed;
+                return;
+            }
             
             var stationsname = selectedItem.ToString();
             if (stationsname == null) return;
@@ -1257,9 +1279,57 @@ namespace Abfahrtstafel
             };
             Uri stationsUri = uriBuilder.Uri;
             TafelVorschau.Source = stationsUri;
+
+            FavorisiertSymbol.Glyph = "\uEB51";
+
+            foreach (string station in favorisierteStationen.Split('\n'))
+            {
+                if (stationsname.Equals(station))
+                {
+                    FavorisiertSymbol.Glyph = "\uEB52";
+                    break;
+                }
+            }
+
+            TafelOptionen.Visibility = Visibility.Visible;
+        }
+
+        private void Favorisieren_Click(object sender, RoutedEventArgs e)
+        {
+            string? stationsAuswahl = StationsNamensListe.SelectedItem.ToString();
+            if (stationsAuswahl == null) return;
+
+            bool bereitsFavorisiert = false;
+
+            foreach (string station in favorisierteStationen.Split('\n'))
+            {
+                if (stationsAuswahl.Equals(station))
+                {
+                    bereitsFavorisiert = true;
+                    break;
+                }
+            }
+
+            if (bereitsFavorisiert) // Eintrag löschen
+            {
+                favorisierteStationen = favorisierteStationen.Replace(stationsAuswahl, "").Replace("\n\n", "\n");
+                FavorisiertSymbol.Glyph = "\uEB51";
+            }
+            else
+            {
+                FavorisiertSymbol.Glyph = "\uEB52";
+
+                if (favorisierteStationen.Length > 1)
+                    favorisierteStationen += '\n';
+
+                favorisierteStationen += stationsAuswahl;
+            }
+            einstellungen.Values.Clear();
+            einstellungen.Values[favoritenSchluessel] = favorisierteStationen;
         }
     }
 }
 // favoriten sollen im appdata gespeichert werden
 // bei appstart werden die favoriten angezeigt und auch immer dann, wenn das suchfeld leer ist
 // wenn keine favoriten vorhanden sind, soll standardmäßig die gesamtliste geladen werden
+// wenn favorisiert, dann ausgefülltes appicon, wenn nicht dann ein nichtausgefülltes 
