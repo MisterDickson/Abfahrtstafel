@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Abfahrtstafel (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Abfahrtstafel (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
