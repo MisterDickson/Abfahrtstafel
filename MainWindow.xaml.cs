@@ -35,6 +35,7 @@ namespace Abfahrtstafel
         {
             this.InitializeComponent();
             ExtendsContentIntoTitleBar = true;
+            AppWindow.SetIcon("Assets\\OEBB_Pflatsch.ico");
             Bridge.appWindow = GetAppWindowForCurrentWindow();
         }
 

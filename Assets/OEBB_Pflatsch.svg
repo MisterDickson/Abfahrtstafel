@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="127.5mm" height="79mm" style="clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" version="1.1" viewBox="0 0 38.55 23.89" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<title>ÖBB Pflatsch logo</title>
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#DD411A}
+   ]]>
+  </style>
+ </defs>
+   <path class="fil0" d="m30.79 8.768-11.52-3.024e-5c-1.753 0-3.175 1.422-3.175 3.175 0 0.6 0.1667 1.161 0.456 1.64h-9.112c-0.07365-0.5361-0.1117-1.084-0.1117-1.64 0-6.595 5.348-11.94 11.94-11.94v3.024e-5h19.27l-7.759 8.768z"/>
+   <path class="fil0" d="m7.759 15.12 11.52 3.024e-5c1.753 0 3.175-1.422 3.175-3.175 0-0.6-0.1667-1.161-0.456-1.64h9.112c0.07365 0.5361 0.1117 1.084 0.1117 1.64 0 6.595-5.348 11.94-11.94 11.94v-3.024e-5h-19.27l7.759-8.768z"/>
+</svg>
