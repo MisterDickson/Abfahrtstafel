@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Abfahrtstafel.StartSeite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Abfahrtstafel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid HorizontalAlignment="Left" RowSpacing="20" ColumnSpacing="20" BorderThickness="10" Margin="5 5 0 0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid HorizontalAlignment="Stretch" RowSpacing="15" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox PlaceholderText="Suchbegriff eingeben" Name="StationsSuchFeld" IsTabStop="True" Loaded="StationsSuchFeld_Loaded" TextChanged="StationsSuchFeld_TextChanged" Grid.Row="0"/>
+            <ListView Name="StationsNamensListe" Loaded="StationsNamensListe_Loaded" SelectionChanged="StationsNamensListe_SelectionChanged" Grid.Row="1"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Stretch" RowSpacing="15" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <WebView2 x:Name="TafelVorschau" Source="https://fahrplan.oebb.at/webapp/" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="750" Margin="20"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="10" HorizontalAlignment="Center" x:Name="TafelOptionen" Visibility="Collapsed">
+                <Button x:Name="Vollbild" Click="Vollbild_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE740;" />
+                        <TextBlock Text="Vollbild" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="Favorisieren" Click="Favorisieren_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xEB51;" x:Name="FavorisiertSymbol" />
+                        <TextBlock Text="Favorisieren" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -8,55 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Abfahrtstafel">
-
-    <Grid HorizontalAlignment="Left" RowSpacing="20" ColumnSpacing="20" BorderThickness="10" Margin="5 5 0 0">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-
-        <Grid HorizontalAlignment="Stretch" RowSpacing="15" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <TextBox PlaceholderText="Suchbegriff eingeben" Name="StationsSuchFeld" IsTabStop="True" Loaded="StationsSuchFeld_Loaded" TextChanged="StationsSuchFeld_TextChanged" Grid.Row="0"/>
-            <ListView Name="StationsNamensListe" Loaded="StationsNamensListe_Loaded" SelectionChanged="StationsNamensListe_SelectionChanged" Grid.Row="1"/>
-        </Grid>
-
-        <Grid HorizontalAlignment="Stretch" RowSpacing="15" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="35"/>
-            </Grid.RowDefinitions>
-
-            <WebView2 x:Name="TafelVorschau" Source="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="750"/>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="10" HorizontalAlignment="Center" x:Name="TafelOptionen" Visibility="Collapsed">
-                <Button x:Name="Favorisieren" Click="Favorisieren_Click">
-                    <StackPanel Orientation="Horizontal" Spacing="6">
-                        <FontIcon Glyph="&#xEB51;" x:Name="FavorisiertSymbol" />
-                        <TextBlock Text="Favorisieren" />
-                    </StackPanel>
-                </Button>
-
-                <Button x:Name="Vollbild">
-                    <StackPanel Orientation="Horizontal" Spacing="6">
-                        <FontIcon Glyph="&#xE740;" />
-                        <TextBlock Text="Vollbild" />
-                    </StackPanel>
-                </Button>
-
-                <Button x:Name="NeueInstanz">
-                    <StackPanel Orientation="Horizontal" Spacing="6">
-                        <FontIcon Glyph="&#xE8A7;" />
-                        <TextBlock Text="Neue Instanz" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </Grid>
-    </Grid>
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="Base"/>
+    </Window.SystemBackdrop>
 </Window>

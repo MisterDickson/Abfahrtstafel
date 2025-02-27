@@ -35,6 +35,8 @@ namespace Abfahrtstafel
             this.InitializeComponent();
         }
 
+        public Frame rootFrame = new Frame();
+
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
@@ -42,6 +44,8 @@ namespace Abfahrtstafel
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            rootFrame.Navigate(typeof(StartSeite), args.Arguments);
+            m_window.Content = rootFrame;
             m_window.Activate();
         }
 
